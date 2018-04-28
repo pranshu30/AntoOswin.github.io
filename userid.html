@@ -1,0 +1,739 @@
+ <!DOCTYPE html>
+<html>
+<title>Network Visualization</title>
+	
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/network.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/footer.css">
+<header>
+           
+ <div class="w3-top">
+  <div class="w3-bar w3-teal w3-card w3-left-align w3-tiny" style="width:100%;">
+          <div class="row">
+		  
+              
+                  <a href="index.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-home w3-xxlarge"></i>
+					<p>HOME</p>
+					</a>
+              <a href="packages.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-file w3-xxlarge"></i>
+					<p>TOP PACKAGES</p>
+					</a>
+            <a href="topics.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-bars w3-xxlarge"></i>
+					<p>TOPICS ANALYSIS</p>
+					</a>
+			<a href="weekly.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-calendar w3-xxlarge"></i>
+					<p>WEEKLY ANALYSIS</p>
+					</a>
+			<a href="userid.html" class="w3-bar-item w3-button w3-padding-small w3-text-teal w3-white" style="width:16.66%;">
+					<i class="fa fa-user w3-xxlarge"></i>
+					<p>USER ID ANALYSIS</p>
+					</a>		
+			<a href="svm.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-gear w3-xxlarge"></i>
+					<p>SVM ANALYSIS</p>
+					</a>						
+            </div>
+			</div>
+		    </header>
+<body class="w3-light-grey">
+<br><br><br>
+<div class="w3-row-padding w3-padding-16 w3-theme-l1 " id="work">
+			<h2 align="center" >Top 40 users-tags Network Visualization & Vote Plot</h2>
+<div>			
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1500px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div id="leftpanel" class="w3-third">
+    
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+          <img src="https://recruiterflow.com/blog/wp-content/uploads/2017/10/stackoverflow.png" id="profileimage" style="width:100%" alt="Click on a User to view:">
+          <div class="w3-display-bottomleft w3-container w3-text-black">
+            <h2 id="uname" style="color:#009688"><span class="w3-white w3-text-teal w3-round">Click on an user to view details</span></h2>
+          </div>
+		  
+        </div>
+        <div class="w3-container">
+		
+          <p id="souserid"><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>User ID</p>
+		  <p id="age"><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Age</p>
+          <p id="location"><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Location</p>
+          <p id="website"><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Website</p>
+          <p id="repo"><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Reputation</p>
+		  <p id="join"><i class="fa fa-calendar fa-fw w3-margin-right w3-large w3-text-teal"></i>Member Since</p>
+          <hr>
+
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>User Reputation / Top Reputation:</b></p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id="repopercent" class="w3-container w3-center w3-round-xlarge w3-teal" style="width:50%">Default%</div>
+          </div>
+          
+          <br>
+			<hr>
+          <p id="totposts" class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Posts</b></p>
+          <p id="qp">Questions</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id = "ques" class="w3-container w3-center w3-round-xlarge w3-teal" style="height:18px;width:50%"></div>
+          </div>
+          <p id="ap">Answers</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id = "ans" class="w3-container w3-center w3-round-xlarge w3-teal" style="height:18px;width:50%"></div>
+          </div>
+          <p id="aap">Accepted Answers</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id = "aans" class="w3-container w3-center w3-round-xlarge w3-teal" style="height:18px;width:50%"></div>
+          </div>
+		  <br>
+			<hr>
+          <p id="totvotes" class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Votes</b></p>
+          <p id="qvp">Questions</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id="qvotes" class="w3-container w3-center w3-round-large w3-teal" style="width:50%">Default%</div>
+          </div>
+          <p id="avp">Answers</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id="avotes" class="w3-container w3-center w3-round-large w3-teal" style="width:50%">Default%</div>
+          </div>
+          <p id="aavp">Accepted Answers</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id="aavotes" class="w3-container w3-center w3-round-large w3-teal" style="width:50%">Default%</div>
+          </div>
+          <br>
+		  
+			<hr>
+          <p id="totbadges" class="w3-large w3-text-theme"><b><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Badges</b></p>
+          <p id="goldp">Gold</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id = "gold" class="w3-container w3-center w3-round-xlarge w3-teal" style="height:18px;width:50%"></div>
+          </div>
+          <p id="silverp">Silver</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id = "silver" class="w3-container w3-center w3-round-xlarge w3-teal" style="height:18px;width:50%"></div>
+          </div>
+          <p id="bronzep">Bronze</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id = "bronze" class="w3-container w3-center w3-round-xlarge w3-teal" style="height:18px;width:50%"></div>
+          </div>
+          <br>
+		  <hr>
+		  <p><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Stack Overflow Profile Link:</b></p>
+		<p id="solink">Unknown</p>
+		
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+    
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        
+		
+        <h4 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xlarge w3-text-teal"></i>Network</h4>
+		<div id="networkviz" class="w3-container">
+		  
+        </div>
+      </div>
+
+      <div class="w3-container w3-card w3-white">
+        <h4 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xlarge w3-text-teal"></i>Posts-Votes Plot</h4>
+        <div id="plotviz"class="w3-container">
+          
+        </div>
+      </div>
+
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Work Row -->
+<div class="w3-row-padding w3-padding-16 w3-theme-l5 w3-center" id="work">
+<h2>OUR TEAM</h2>
+<p>Meet the team - our Picassos:</p>
+
+<div class="w3-row"><br>
+
+<div class="w3-quarter">
+  <img src="images/malkiyat1.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+  <h3>Malkiyat Singh</h3>
+  <h6>msingh55@asu.edu</h6>
+</div>
+
+<div class="w3-quarter">
+  <img src="images/ankush1.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+  <h3>Ankush Kanungo</h3>
+  <h6>akanung1@asu.edu</h6>
+</div>
+
+<div class="w3-quarter">
+  <img src="images/pranshu.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+  <h3>Pranshu Varshney</h3>
+  <h6>pvarshn1@asu.edu</h6>
+</div>
+
+<div class="w3-quarter">
+  <img src="images/anto1.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+  <h3>Anto Oswin Nihal</h3>
+  <h6>antooswin@asu.edu</h6>
+</div>
+</div>
+
+</div>
+
+<!-- Container -->
+
+
+<!-- Footer -->
+<footer class="ww3-container w3-padding-32 w3-theme-l1 w3-center">
+  <h4>Follow Us</h4>
+  <a class="w3-button w3-large w3-teal w3-hide-small" href="https://www.linkedin.com/in/malkiyat/" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+  <a class="w3-button w3-large w3-teal w3-hide-small" href="https://www.linkedin.com/in/ankush-kanungo/" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+  <a class="w3-button w3-large w3-teal w3-hide-small" href="https://www.linkedin.com/in/pranshu-varshney/" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+  <a class="w3-button w3-large w3-teal w3-hide-small" href="https://www.linkedin.com/in/anto-oswin/" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+  <p>Data Visualization CSE 578 <a href="https://sites.google.com/a/asu.edu/cse578_datavisualization-spring-2018/" target="_blank">Spring 18</a></p>
+
+  <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
+    <span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>   
+    <a class="w3-button w3-theme" href=""><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+  </div>
+</footer>
+      
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+
+<script>
+
+var data =[[22656, ["eclipse", "android", "loops", "arrays", "sql", "hibernate", "xml", "multithreading", "generics", "swing", "tomcat", "sockets", "arraylist", "interface", "image", "object", "servlets", "class", "methods", "exception", "junit", "mysql", "jsp", "testing", "json", "jdbc", "string", "algorithm", "jar", "file", "list", "netbeans", "data", "javascript", "security", "spring", "maven", "c", "io", "html", "rest", "database", "jpa", "regex", "selenium"]], [57695, ["arraylist", "generics", "loops", "c", "multithreading", "string", "android", "interface", "algorithm", "maven", "file", "junit", "sockets", "exception", "class", "arrays", "database", "io", "sql", "data", "xml", "json", "object", "regex", "eclipse", "list", "security", "javascript", "methods", "servlets", "testing", "swing", "mysql", "selenium", "netbeans", "jar", "rest"]], [131872, ["swing", "image", "mysql", "string", "io", "arraylist", "eclipse", "multithreading", "file", "database", "html", "layout", "netbeans", "arrays", "jdbc", "sql", "web", "sockets", "hibernate", "loops", "exception", "data", "list", "class", "javascript", "interface", "regex", "methods", "object", "generics"]], [139985, ["list", "loops", "testing", "multithreading", "sockets", "arrays", "algorithm", "eclipse", "exception", "android", "io", "spring", "swing", "netbeans", "string", "class", "json", "file", "object", "c", "hibernate", "tomcat", "jdbc", "data", "jsp", "servlets", "database", "maven", "xml", "arraylist", "sql", "apache", "methods", "mysql", "security", "jpa", "junit", "generics", "interface", "jar", "javascript", "html", "regex", "image", "rest"]], [207421, ["sockets", "io", "multithreading", "data", "tomcat", "android", "swing", "netbeans", "mysql", "jar", "database", "arrays", "servlets", "regex", "exception", "file", "c", "object", "string", "rest", "list", "jdbc", "class", "interface", "arraylist", "security", "apache", "generics", "jsp", "eclipse", "algorithm", "maven", "spring", "web", "methods", "json", "sql", "xml", "loops", "image", "junit", "hibernate"]], [256196, ["regex", "string", "arrays", "arraylist", "multithreading", "class", "methods", "hibernate", "jpa", "generics", "io", "maven", "list", "object", "loops", "algorithm", "selenium", "eclipse", "exception", "interface", "sql", "mysql", "json", "jdbc", "spring", "android", "junit", "servlets", "xml", "netbeans", "file", "security", "testing", "html"]], [260990, ["maven", "html", "jsp", "spring", "tomcat", "json", "jar", "javascript", "eclipse", "arraylist", "mysql", "sql", "image", "servlets", "arrays", "swing", "multithreading", "hibernate", "exception", "object", "loops", "netbeans", "list", "web", "database", "jdbc", "string", "security", "regex", "generics", "android", "javafx", "methods", "algorithm", "file", "rest", "class", "xml", "jpa", "junit", "interface", "sockets", "selenium"]], [335858, ["list", "arrays", "generics", "regex", "string", "algorithm", "eclipse", "jdbc", "loops", "arraylist", "exception", "object", "c", "interface", "mysql", "sql", "xml", "multithreading", "file", "database", "methods", "swing", "hibernate", "image", "testing", "junit", "jar", "javafx", "class", "user", "servlets", "data", "android", "io", "sockets"]], [418556, ["swing", "image", "mysql", "io", "javascript", "security", "maven", "eclipse", "tomcat", "servlets", "html", "arrays", "xml", "jar", "class", "multithreading", "layout", "file", "javafx", "c", "netbeans", "web", "jsp", "database", "arraylist", "methods", "string", "jdbc", "exception"]], [438154, ["spring", "jsp", "android", "json", "servlets", "generics", "arrays", "multithreading", "sql", "database", "list", "exception", "junit", "tomcat", "hibernate", "arraylist", "jdbc", "xml", "eclipse", "maven", "class", "rest", "string", "apache", "interface", "mysql", "jpa", "image", "jar", "object", "methods", "web", "swing", "netbeans", "sockets", "file", "io", "regex", "loops", "html", "algorithm", "javascript", "testing", "javafx", "data"]], [522444, ["swing", "loops", "class", "sql", "image", "netbeans", "string", "arraylist", "layout", "object", "sockets", "arrays", "multithreading", "list", "eclipse", "interface", "mysql", "methods", "junit", "database", "html", "exception", "jar", "android", "xml", "algorithm", "generics", "c", "jdbc", "io", "file"]], [571407, ["hibernate", "multithreading", "arrays", "mysql", "spring", "jpa", "methods", "jsp", "arraylist", "servlets", "object", "rest", "junit", "swing", "jar", "exception", "sockets", "html", "eclipse", "generics", "interface", "netbeans", "jdbc", "class", "string", "maven", "android", "json", "testing", "sql", "database", "tomcat", "algorithm", "loops", "xml", "file", "image", "list", "io", "selenium", "web", "regex"]], [573032, ["swing", "jsp", "json", "rest", "hibernate", "servlets", "spring", "javascript", "jdbc", "mysql", "image", "html", "sql", "junit", "multithreading", "xml", "netbeans", "eclipse", "arraylist", "web", "tomcat", "regex", "maven", "jar", "jpa", "arrays", "class", "exception", "security", "methods", "apache", "database", "string"]], [829571, ["javafx", "android", "generics", "class", "arraylist", "exception", "loops", "multithreading", "regex", "arrays", "junit", "string", "object", "testing", "list", "file", "algorithm", "xml", "swing", "eclipse", "jar", "servlets", "data", "apache", "maven", "c", "database", "security", "netbeans", "io", "json", "jdbc", "rest", "sql"]], [871026, ["android", "eclipse", "arrays", "string", "arraylist", "spring", "mysql", "jdbc", "regex", "swing", "hibernate", "sql", "list", "jpa", "maven", "javafx", "generics", "testing", "jsp", "object", "methods", "class", "multithreading", "tomcat", "junit", "file", "html", "exception", "interface", "image", "netbeans", "xml", "layout", "json", "jar", "servlets", "loops", "selenium"]], [984823, ["arrays", "android", "html", "swing", "io", "regex", "jsp", "servlets", "generics", "eclipse", "file", "algorithm", "netbeans", "xml", "mysql", "spring", "database", "string", "exception", "class", "sql", "image", "arraylist", "methods", "jdbc", "list", "interface", "loops", "c", "jar", "web", "object", "javafx", "apache", "multithreading", "maven", "sockets", "json", "junit", "security", "hibernate", "jpa"]], [992484, ["swing", "netbeans", "layout", "class", "javafx", "file", "io", "multithreading", "image", "methods", "arrays", "xml", "object", "mysql", "hibernate", "eclipse", "jar", "loops", "arraylist", "string", "sql", "jdbc", "database", "html", "regex", "generics", "algorithm", "sockets", "servlets", "exception", "list", "interface", "maven", "javascript", "tomcat", "testing", "user", "rest"]], [1065197, ["generics", "interface", "arrays", "database", "jsp", "mysql", "spring", "list", "multithreading", "javascript", "servlets", "jdbc", "hibernate", "jpa", "android", "string", "json", "rest", "swing", "sql", "netbeans", "arraylist", "file", "object", "exception", "algorithm", "c", "class", "methods", "html", "tomcat", "junit", "loops", "eclipse", "xml", "io", "testing", "apache", "web", "jar", "maven", "sockets", "image", "data", "listview", "regex"]], [1081110, ["arrays", "json", "loops", "arraylist", "class", "methods", "mysql", "swing", "generics", "interface", "string", "io", "junit", "list", "xml", "testing", "object", "sql", "hibernate", "jpa", "regex", "android", "sockets", "selenium", "eclipse", "multithreading", "algorithm", "exception", "database", "html", "servlets", "jsp", "jdbc", "javascript", "file", "c", "rest", "image", "web", "jar"]], [1093528, ["junit", "multithreading", "android", "regex", "string", "generics", "exception", "jar", "file", "io", "arraylist", "json", "spring", "arrays", "c", "sockets", "methods", "eclipse", "netbeans", "loops", "algorithm", "interface", "javascript", "html", "testing", "selenium", "listview", "class", "swing", "web", "tomcat", "image", "xml", "maven", "sql", "jdbc", "object", "list", "servlets"]], [1103872, ["list", "class", "generics", "android", "multithreading", "swing", "arraylist", "javafx", "spring", "sql", "hibernate", "methods", "arrays", "regex", "loops", "file", "string", "eclipse", "interface", "jdbc", "exception", "mysql", "sockets", "tomcat", "image", "jar", "algorithm", "maven", "servlets", "object", "netbeans", "testing", "jpa"]], [1221571, ["android", "apache", "arrays", "generics", "arraylist", "javafx", "string", "loops", "swing", "mysql", "class", "methods", "spring", "object", "interface", "exception", "jdbc", "multithreading", "sql", "servlets", "algorithm", "list", "eclipse", "netbeans", "io", "json", "hibernate", "file", "xml", "data", "database", "regex", "selenium", "c", "html", "javascript", "jsp", "jpa", "sockets", "jar"]], [1393766, ["loops", "regex", "string", "methods", "xml", "swing", "arrays", "list", "android", "algorithm", "arraylist", "generics", "json", "spring", "html", "file", "eclipse", "jsp", "class", "multithreading", "javascript", "servlets", "exception", "tomcat", "mysql", "jdbc", "object", "sockets", "user"]], [1705598, ["xml", "apache", "tomcat", "file", "arrays", "mysql", "servlets", "list", "html", "image", "swing", "object", "string", "generics", "javafx", "jsp", "spring", "algorithm", "web", "multithreading", "exception", "eclipse", "jar", "sockets", "javascript", "arraylist", "class", "json", "security", "database", "netbeans", "jpa", "jdbc", "android", "interface", "maven", "rest", "hibernate", "sql", "io", "layout", "methods"]], [1707091, ["class", "arrays", "generics", "methods", "android", "interface", "algorithm", "string", "multithreading", "mysql", "jdbc", "arraylist", "loops", "junit", "object", "database", "eclipse", "testing", "swing", "regex", "sql", "netbeans", "file", "exception", "apache", "image", "json", "list", "xml", "selenium", "security", "jar"]], [1831293, ["spring", "generics", "multithreading", "junit", "io", "regex", "file", "mysql", "sql", "maven", "xml", "list", "object", "arraylist", "exception", "android", "eclipse", "jar", "string", "jdbc", "sockets", "arrays", "data", "web", "loops", "class", "hibernate", "jsp", "servlets", "html", "tomcat", "javascript", "apache", "testing", "jpa", "javafx", "algorithm", "database"]], [2189127, ["javafx", "html", "spring", "mysql", "listview", "loops", "exception", "image", "android", "generics", "multithreading", "file", "netbeans", "swing", "xml", "class", "list", "interface", "methods", "arraylist", "database", "layout", "hibernate", "algorithm", "maven", "jar", "javascript", "regex"]], [2193767, ["interface", "arrays", "arraylist", "regex", "class", "methods", "string", "exception", "multithreading", "object", "android", "algorithm", "eclipse", "loops", "file", "io", "generics", "security", "swing", "list", "javascript", "netbeans", "spring", "c", "database", "xml", "data"]], [2300597, ["arrays", "string", "list", "android", "hibernate", "file", "mysql", "eclipse", "maven", "regex", "io", "multithreading", "sql", "methods", "class", "arraylist", "algorithm", "swing", "object", "spring", "jdbc", "exception", "servlets", "loops", "generics", "json", "sockets", "jar", "interface", "jpa", "c", "image", "xml", "html", "database", "netbeans", "jsp", "javascript", "tomcat"]], [2310289, ["file", "servlets", "arrays", "object", "string", "methods", "loops", "io", "swing", "jsp", "javascript", "android", "eclipse", "multithreading", "mysql", "hibernate", "html", "class", "json", "arraylist", "netbeans", "generics", "sql", "list", "sockets", "database", "jdbc", "spring", "regex", "interface", "javafx", "tomcat", "c", "apache", "exception", "security", "xml", "algorithm", "maven", "jpa", "image", "web"]], [2422776, ["arrays", "servlets", "android", "maven", "mysql", "sql", "jdbc", "generics", "eclipse", "algorithm", "string", "interface", "jar", "methods", "arraylist", "c", "object", "multithreading", "file", "loops", "swing", "spring", "exception", "junit", "list", "class", "database", "netbeans", "jsp", "hibernate", "regex"]], [2464386, ["loops", "regex", "algorithm", "generics", "multithreading", "arraylist", "arrays", "android", "selenium", "interface", "javascript", "string", "list", "object", "netbeans", "methods", "class", "html", "swing", "eclipse", "exception", "sql", "javafx", "listview", "file", "io", "json", "junit"]], [2587435, ["xml", "rest", "eclipse", "spring", "maven", "json", "junit", "generics", "jpa", "swing", "servlets", "android", "netbeans", "tomcat", "jar", "image", "sql", "jdbc", "exception", "arraylist", "arrays", "class", "file", "database", "hibernate", "mysql", "web", "multithreading", "regex", "layout", "object", "methods", "interface", "javafx", "loops", "io", "list", "string", "sockets", "user"]], [2670892, ["eclipse", "jar", "layout", "file", "android", "multithreading", "arrays", "c", "swing", "arraylist", "javascript", "junit", "listview", "maven", "image", "xml", "string", "database", "jpa", "apache"]], [2711488, ["eclipse", "multithreading", "arrays", "generics", "netbeans", "interface", "regex", "algorithm", "sockets", "jpa", "javafx", "c", "string", "swing", "object", "servlets", "exception", "file", "layout", "jar", "maven", "class", "loops", "arraylist", "io", "list", "security", "xml"]], [2970947, ["sql", "android", "string", "loops", "exception", "list", "arraylist", "generics", "data", "file", "netbeans", "io", "eclipse", "spring", "mysql", "database", "jdbc", "json", "junit", "methods", "arrays", "multithreading", "javafx", "swing", "xml", "object", "servlets", "maven", "regex", "interface", "tomcat", "c", "layout", "class", "jar", "html", "algorithm", "selenium", "image", "jsp", "sockets", "jpa", "apache", "listview", "security", "hibernate", "javascript", "user", "web"]], [3049628, ["arrays", "eclipse", "android", "junit", "string", "generics", "multithreading", "sql", "netbeans", "spring", "swing", "arraylist", "algorithm", "layout", "loops", "class", "hibernate", "interface", "object", "jpa", "xml", "testing", "selenium", "list", "javafx", "exception", "methods", "sockets", "mysql", "image", "rest", "regex", "c", "file", "io", "data", "jdbc", "user", "jsp", "servlets", "database", "maven", "tomcat", "security", "jar", "javascript", "json"]], [3182664, ["swing", "image", "arraylist", "algorithm", "loops", "junit", "generics", "arrays", "interface", "javafx", "eclipse", "string", "list", "multithreading", "exception", "jar", "file", "netbeans", "android", "methods", "object", "layout", "class", "sockets", "hibernate", "html"]], [3218114, ["swing", "arraylist", "jsp", "servlets", "mysql", "multithreading", "xml", "sockets", "tomcat", "eclipse", "exception", "image", "string", "spring", "regex", "generics", "arrays", "html", "javascript", "android", "hibernate", "list", "io", "json", "selenium", "class", "jdbc", "algorithm", "netbeans", "interface", "file", "rest", "sql", "loops", "object", "methods", "layout", "maven", "web", "database", "apache", "jar"]], [3545273, ["list", "spring", "rest", "sockets", "jsp", "servlets", "regex", "hibernate", "arrays", "algorithm", "tomcat", "mysql", "eclipse", "xml", "jdbc", "class", "object", "web", "multithreading", "jpa", "sql", "generics", "json", "c", "maven", "jar", "image", "database", "arraylist", "exception", "file", "javascript", "string", "loops", "netbeans", "junit", "interface"]]];
+var outer = d3.map();
+var inner = [];
+var links = [];
+var outerId = [0];
+
+data.forEach(function(d){
+    
+    if (d == null)
+        return;
+    
+    i = { id: 'i' + inner.length, name: d[0], related_links: [] };
+    i.related_nodes = [i.id];
+    inner.push(i);
+    
+    if (!Array.isArray(d[1]))
+        d[1] = [d[1]];
+    
+    d[1].forEach(function(d1){
+        
+        o = outer.get(d1);
+        
+        if (o == null)
+        {
+            o = { name: d1, id: 'o' + outerId[0], related_links: [] };
+            o.related_nodes = [o.id];
+            outerId[0] = outerId[0] + 1;    
+            
+            outer.set(d1, o);
+        }
+        
+        // create the links
+        l = { id: 'l-' + i.id + '-' + o.id, inner: i, outer: o }
+        links.push(l);
+        
+        // and the relationships
+        i.related_nodes.push(o.id);
+        i.related_links.push(l.id);
+        o.related_nodes.push(i.id);
+        o.related_links.push(l.id);
+    });
+});
+
+data = {
+    inner: inner,
+    outer: outer.values(),
+    links: links
+}
+
+// sort the data -- TODO: have multiple sort options
+outer = data.outer;
+data.outer = Array(outer.length);
+
+
+var i1 = 0;
+var i2 = outer.length - 1;
+
+for (var i = 0; i < data.outer.length; ++i)
+{
+    if (i % 2 == 1)
+        data.outer[i2--] = outer[i];
+    else
+        data.outer[i1++] = outer[i];
+}
+
+
+var diameter = document.getElementById("networkviz").offsetWidth;//1000;
+var rect_width = document.getElementById("networkviz").offsetWidth/10;
+var rect_height = document.getElementById("networkviz").offsetWidth/52;
+
+var link_width = "0.5px"; 
+
+var il = data.inner.length;
+var ol = data.outer.length;
+
+var inner_y = d3.scale.linear()
+    .domain([0, il])
+    .range([-(il * rect_height)/2, (il * rect_height)/2]);
+
+mid = (data.outer.length/2.0)
+var outer_x = d3.scale.linear()
+    .domain([0, mid, mid, data.outer.length])
+    .range([15, 170, 190 ,355]);
+
+var outer_y = d3.scale.linear()
+    .domain([0, data.outer.length])
+    .range([0, diameter / 2 - 120]);
+
+
+// setup positioning
+data.outer = data.outer.map(function(d, i) { 
+    d.x = outer_x(i);
+    d.y = diameter/2.5;
+    return d;
+});
+
+data.inner = data.inner.map(function(d, i) { 
+    d.x = -(rect_width / 2);
+    d.y = inner_y(i);
+    return d;
+});
+
+
+function projectX(x)
+{
+    return ((x - 90) / 180 * Math.PI) - (Math.PI/2);
+}
+
+var diagonal = d3.svg.diagonal()
+    .source(function(d) { return {"x": d.outer.y * Math.cos(projectX(d.outer.x)), 
+                                  "y": -d.outer.y * Math.sin(projectX(d.outer.x))}; })            
+    .target(function(d) { return {"x": d.inner.y + rect_height/2,
+                                  "y": d.outer.x > 180 ? d.inner.x : d.inner.x + rect_width}; })
+    .projection(function(d) { return [d.y, d.x]; });
+
+var svg = d3.select("#networkviz").append("svg").attr('class', 'map')
+    .attr("width", diameter)
+    .attr("height", diameter)
+  .append("g")
+    .attr("transform", "translate(" + diameter / 2 + "," + diameter /2  + ")");
+    
+
+// links
+var link = svg.append('g').attr('class', 'links').selectAll(".link")
+    .data(data.links)
+  .enter().append('path')
+    .attr('class', 'link')
+    .attr('id', function(d) { return d.id })
+    .attr("d", diagonal)
+    .attr('stroke', "#D3D3D3") 
+    .attr('stroke-width', link_width);
+
+// outer nodes
+
+var onode = svg.append('g').selectAll(".outer_node")
+    .data(data.outer)
+  .enter().append("g")
+    .attr("class", "outer_node")
+    .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+    .on("mouseover", mouseover)
+    .on("mouseout", mouseout);
+  
+onode.append("circle")
+    .attr('id', function(d) { return d.id })
+    .attr("r", 4.5);
+  
+onode.append("circle")
+    .attr('r', 20)
+    .attr('visibility', 'hidden');
+  
+onode.append("text")
+    .attr('id', function(d) { return d.id + '-txt'; })
+    .attr("dy", ".31em")
+    .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+    .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
+    .text(function(d) { return d.name; });
+  
+// inner nodes
+  
+var inode = svg.append('g').selectAll(".inner_node")
+    .data(data.inner)
+  .enter().append("g")
+    .attr("class", "inner_node")
+    .attr("transform", function(d, i) { return "translate(" + d.x + "," + d.y + ")"})
+    .on("mouseover", mouseover)
+    .on("mouseout", mouseout)
+    .on("click",mouseclick);
+  
+inode.append('rect')
+    .attr('width', rect_width)
+    .attr('height', rect_height)
+    .attr('id', function(d) { return d.id; })
+    .attr('fill', "black")
+    .style('stroke','white')
+    .style('stroke-width',5)
+  
+inode.append("text")
+    .attr('id', function(d) { return d.id + '-txt'; })
+    .attr('text-anchor', 'middle')
+    .attr("transform", "translate(" + rect_width/2 + ", " + rect_height * .75 + ")")
+    .style('fill', 'white')
+    .text(function(d) { return d.name; });
+
+// need to specify x/y/etc
+d3.select(self.frameElement).style("height", diameter - 150 + "px");
+
+
+function mouseclick(d)
+{ 
+    // bring to front
+    d3.select(".chart").remove();
+    d3.select(".profile").remove();
+    for (var i = 0; i < d.related_nodes.length; i++)
+    {   
+        if(i==0){
+       profile(d.name);
+        }
+        d3.select('#' + d.related_nodes[i]).classed('highlight', true);
+        d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'bold');
+        d3.selectAll(".outer_node")
+        .select('#' + d.related_nodes[i]).style("fill", "#009688");
+    }
+    //tags
+    for (var i = 0; i < d.related_links.length; i++)
+        d3.select('#' + d.related_links[i]).attr('stroke-width', '4px').attr('stroke','#009688');
+       
+   
+
+
+}
+
+
+function mouseover(d)
+{
+    // bring to front
+    d3.selectAll('.links .link').sort(function(a, b){ return d.related_links.indexOf(a.id); }); 
+    
+    for (var i = 0; i < d.related_nodes.length; i++)
+    {   
+
+        d3.select('#' + d.related_nodes[i]).classed('highlight', true);
+        d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'bold');
+        d3.selectAll(".outer_node")
+        .select('#' + d.related_nodes[i]).style("fill", "#009688");
+    }
+    //tags
+    for (var i = 0; i < d.related_links.length; i++)
+        d3.select('#' + d.related_links[i]).attr('stroke-width', '4px').attr('stroke','#009688');
+       
+   
+
+
+}
+function mouseout(d)
+{       
+for (var i = 0; i < d.related_nodes.length; i++)
+    {
+        d3.select('#' + d.related_nodes[i]).classed('highlight', false);
+        d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'normal');
+        d3.selectAll(".link")
+        .select('#' + d.related_nodes[i]).style("fill", "lightgrey");
+        d3.selectAll(".outer_node")
+        .select('#' + d.related_nodes[i]).style("fill", "white");
+    }
+    //tags
+    for (var i = 0; i < d.related_links.length; i++)
+
+        d3.select('#' + d.related_links[i]).attr('stroke-width', link_width).attr('stroke',"#D3D3D3");
+        
+}
+
+function profile(userid){
+
+function filtercsv(csv_data,id) {
+    
+    var atime =[];
+    var avote = [];
+	var qvote = [];
+	var aavote = [];
+    var aatime =[];
+    var qtime =[];
+    var a_all = [];
+    var aa_all = [];
+    var q_all = [];
+    csv_data.forEach(function(valueobj){
+    if(valueobj["user_id"]==id){
+        if(valueobj["type"]=='answer'){
+            atime.push(valueobj["time"]);
+            avote.push(valueobj["vote"]);
+          }
+          if(valueobj["type"]=='accepted-answer'){
+            aatime.push(valueobj["time"]);
+            aavote.push(valueobj["vote"]);
+          }
+          if(valueobj["type"]=='question'){
+            qtime.push(valueobj["time"]);
+            qvote.push(valueobj["vote"]);
+          }}
+            
+        }
+
+    );
+	
+    var i = 0;
+    atime.forEach(function(d){
+    a_all[i] = {time: atime[i],vote:avote[i]};
+    i = i+1;
+    })
+    var i = 0;
+    aatime.forEach(function(d){
+    aa_all[i] = {time: aatime[i],vote:aavote[i]};
+    i = i+1;
+    })
+    var i = 0;
+    qtime.forEach(function(d){
+    q_all[i] = {time: qtime[i],vote:qvote[i]};
+    i = i+1;
+    })
+	if (avote.length == 0){avote[0]=0;}
+	if (qvote.length == 0){qvote[0]=0;}
+	if (aavote.length == 0){aavote[0]=0;}
+	function getSum(total, num) {
+    return total + num;
+}
+var totalvotes = avote.reduce(getSum)+aavote.reduce(getSum)+qvote.reduce(getSum);
+document.getElementById("totvotes").innerHTML = '<b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Votes: '+totalvotes+'</b>';
+document.getElementById("qvp").innerHTML = 'Question Votes: '+qvote.reduce(getSum)+ '/'+totalvotes;
+document.getElementById("qvotes").innerHTML = Math.round(qvote.reduce(getSum) *100/+totalvotes)+"%";
+document.getElementById("qvotes").style = 'width:'+Math.round(qvote.reduce(getSum)*100/totalvotes)+"%";
+document.getElementById("avp").innerHTML = 'Answer Votes: '+avote.reduce(getSum)+ '/'+totalvotes;
+document.getElementById("avotes").innerHTML = Math.round(avote.reduce(getSum) *100/+totalvotes)+"%";
+document.getElementById("avotes").style = 'width:'+Math.round(avote.reduce(getSum)*100/totalvotes)+"%";
+document.getElementById("aavp").innerHTML = 'Accepted Answer Votes: '+aavote.reduce(getSum)+ '/'+totalvotes;
+document.getElementById("aavotes").innerHTML = Math.round(aavote.reduce(getSum) *100/+totalvotes)+"%";
+document.getElementById("aavotes").style = 'width:'+Math.round(aavote.reduce(getSum)*100/totalvotes)+"%";
+    return [{id:'answer',values:a_all},{id:'accepted-answer',values:aa_all},{id:'question',values:q_all}];
+}
+function allvotes(csv_data,id)
+    {var totalvote =[];
+    csv_data.forEach(function(valueobj){
+                                        if(valueobj["user_id"]==id){
+                                        totalvote.push(valueobj["vote"]);}
+                                        })
+    return totalvote;
+}
+
+	
+	var width=document.getElementById("plotviz").offsetWidth - 50,
+     height=(document.getElementById("leftpanel").offsetHeight - document.getElementById("networkviz").offsetHeight)-285 ;
+
+var svg1 = d3.select("#plotviz").append("svg").attr('class', 'chart')
+    .attr("width", width + 200)
+    .attr("height", height+100)
+	.append("g")
+	.attr("transform", "translate(" + 30 + "," + 20 + ")");
+
+var parseTime = d3.timeParse("%Y%m%d");
+
+var x = d3.scaleTime().range([0, width]),
+    y = d3.scaleLinear().range([height, 0]),
+    z = d3.scaleOrdinal(d3.schemeCategory10);
+
+var line = d3.line()
+    .curve(d3.curveBasis)
+    .x(function(d) { return x(d.time); })
+    .y(function(d) { return y(d.vote); });
+
+ 
+
+d3.csv("data/post_uid_vote_time.csv", type, function(error,data) {
+  if (error) throw error;
+  data.forEach(function(d){
+            d.user_id = +d.user_id;
+            d.vote = +d.vote;
+            d.time = +d.time;
+            
+        });
+  var chart_data = filtercsv(data,userid);
+  
+ 
+  x.domain(d3.extent(data, function(d) { return d.time; }));
+  y.domain([
+      d3.min(allvotes(data,userid)),
+    d3.max(allvotes(data,userid))
+  ]);
+
+  z.domain(chart_data.map(function(c) { return c.id; }));
+
+  svg1.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x))
+      .selectAll("text")
+      .attr("transform", "rotate(-90)")
+      .attr("dx","-3em")
+      .attr("dy","-0.5em")
+      .append("text")
+      .attr("x",750)
+      .attr("fill", "#000")
+      .text("Time")
+      
+      ;
+
+  svg1.append("g")
+      .attr("class", "axis axis--y")
+      .call(d3.axisLeft(y))
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("fill", "#000")
+      .text("Votes");
+ 
+  var rtype = svg1.selectAll(".rtype")
+    .data(chart_data)
+    .enter().append("g")
+      .attr("class", "rtype")
+      .attr("fill", "none");
+      
+    
+ var postscount = {'answer':0,'accepted-answer':0,'question':0};
+  var color= {'answer':'#005ff9','accepted-answer':'#00ff1d','question':'#ff0000'};
+  rtype.append("path")
+      .attr("class", "line")
+      .attr("d", function(d) { postscount[d.id] = d.values.length; return line(d.values); })
+	  .style("stroke", function(d) { return color[d.id]; })
+	  .style("stroke-width","4px");
+	  var totpost = postscount['question']+postscount['answer']+postscount['accepted-answer'];
+	  document.getElementById("totposts").innerHTML = '<b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Posts: ' + totpost+'</b>';
+	  document.getElementById("ques").style = "width:"+ Math.round(postscount['question']*100/totpost) +"%";
+	  document.getElementById("ques").innerHTML =Math.round(postscount['question']*100/totpost)+"%";
+	  document.getElementById("qp").innerHTML = "Questions: " + postscount['question']+"/"+totpost;
+	  document.getElementById("ans").style = "width:"+ Math.round(postscount['answer']*100/totpost) +"%";
+	   document.getElementById("ans").innerHTML =Math.round(postscount['answer']*100/totpost)+"%";
+	  document.getElementById("ap").innerHTML = "Answers: " + postscount['answer']+"/"+totpost;
+	  document.getElementById("aans").style = "width:"+ Math.round(postscount['accepted-answer']*100/totpost) +"%";
+	   document.getElementById("aans").innerHTML =Math.round(postscount['accepted-answer']*100/totpost)+"%";
+	  document.getElementById("aap").innerHTML = "Accepted Answers: " + postscount['accepted-answer']+"/"+totpost;
+	  
+      var rectx=document.getElementById("plotviz").offsetWidth-200,recty=-10;
+	  var rect = svg1.append("rect")
+.attr("x", rectx)
+.attr("y", recty)
+.attr("width", 130)
+.attr("height", 50)
+.style("fill","white")
+.style("stroke", "black");
+	  svg1.append("g")
+      .append("text")
+      .attr("x",rectx+30)
+      .attr("y",recty+14)
+      .text("Question");
+	  svg1.append("circle")
+	  .attr("r",6)
+	  .attr("cx",rectx+15)
+      .attr("cy",recty+10)
+	  .attr("fill", color['question']);
+      svg1.append("g")
+      .append("text")
+      .attr("x",rectx+30)
+      .attr("y",recty+29)
+      .text("Answer");
+	  svg1.append("circle")
+	  .attr("r",6)
+	  .attr("cx",rectx+15)
+      .attr("cy",recty+25)
+	  .attr("fill", color['answer']);
+      svg1.append("g")
+      .append("text")
+      .attr("x",rectx+30)
+      .attr("y",recty+44)
+      .text("Accepted Answer");
+	  svg1.append("circle")
+	  .attr("r",6)
+	  .attr("cx",rectx+15)
+      .attr("cy",recty+40)
+	  .attr("fill", color['accepted-answer']);
+      
+	  
+
+ var g2 = d3.select("svg").append("g").attr("class","profile").attr("transform", "translate(" + 700 + "," + 50 + ")");
+var topuserrep=1021403;
+var userurl = "http://api.stackexchange.com/2.2/users/" + userid + "?order=desc&sort=reputation&site=stackoverflow";
+fetch(userurl) 
+.then((resp) => resp.json()) 
+.then(function(data) {
+if (+data.items[0].reputation>repo_percentage){topuserrep=+data.items[0].reputation;}
+var repo_percentage=Math.round(+data.items[0].reputation * 100/topuserrep);
+var created = new Date(0); 
+  created.setUTCSeconds(data.items[0].creation_date);
+document.getElementById("profileimage").src=data.items[0].profile_image;
+document.getElementById("uname").innerHTML = '<span class="w3-tag w3-white w3-text-teal w3-round">'+data.items[0].display_name+"</span>";
+document.getElementById("location").innerHTML = '<i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Location: ' + data.items[0].location;
+document.getElementById("souserid").innerHTML = '<i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Stack Overflow User ID: '+userid;
+document.getElementById("age").innerHTML = '<i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Age: '+data.items[0].age;
+document.getElementById("website").innerHTML = '<i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Website: '+data.items[0].website_url;
+document.getElementById("repo").innerHTML = '<i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Reputation: '+data.items[0].reputation;
+document.getElementById("join").innerHTML = '<i class="fa fa-calendar fa-fw w3-margin-right w3-large w3-text-teal"></i>Member Since: '+created;
+document.getElementById("repopercent").innerHTML = repo_percentage+"%";
+document.getElementById("repopercent").style = "width:"+repo_percentage+"%";
+var badges = data.items[0].badge_counts.bronze + data.items[0].badge_counts.gold + data.items[0].badge_counts.silver;
+document.getElementById("totbadges").innerHTML = '<b><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Badges: '+badges+'</b>';
+
+document.getElementById("gold").style = "width:"+ Math.round(data.items[0].badge_counts.gold*100/badges) +"%";
+	  document.getElementById("gold").innerHTML =Math.round(data.items[0].badge_counts.gold*100/badges)+"%";
+	  document.getElementById("goldp").innerHTML = "Gold Badges: " + data.items[0].badge_counts.gold+"/"+badges;
+	  document.getElementById("silver").style = "width:"+ Math.round(data.items[0].badge_counts.silver*100/badges) +"%";
+	  document.getElementById("silver").innerHTML =Math.round(data.items[0].badge_counts.silver*100/badges)+"%";
+	  document.getElementById("silverp").innerHTML = "Silver Badges: " + data.items[0].badge_counts.silver+"/"+badges;
+	  document.getElementById("bronze").style = "width:"+ Math.round(data.items[0].badge_counts.bronze*100/badges) +"%";
+	  document.getElementById("bronze").innerHTML =Math.round(data.items[0].badge_counts.bronze*100/badges)+"%";
+	  document.getElementById("bronzep").innerHTML = "Bronze Badges: " + data.items[0].badge_counts.bronze+"/"+badges;
+	  document.getElementById("solink").innerHTML = data.items[0].link;
+	  
+})
+.catch(function() {
+    console.log("Exceeded 300 calls to StackOverflow API");
+});
+
+});
+
+
+function type(d, _, columns) {
+  d.time = parseTime(d.time);
+  for (var i = 1, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
+  return d;
+}
+}
+</script>
+</body>
+</html>

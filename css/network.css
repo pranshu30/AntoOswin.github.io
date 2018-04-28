@@ -1,0 +1,57 @@
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+box-sizing: border-box;
+}
+
+
+#networkviz{ 
+  transform:scale(1); 
+  transform-origin: center center;
+position: relative;
+  -webkit-transform:scale(1); 
+  -webkit-transform-origin: center center;
+}
+#plotviz{ 
+  transform:scale(1); 
+  transform-origin: center center;
+position: relative;
+  -webkit-transform:scale(1); 
+  -webkit-transform-origin: center center;
+}
+svg {
+
+    font: 11px "Roboto";
+}
+
+text {
+    pointer-events: none;
+}
+
+.inner_node rect {
+    pointer-events: all;
+	fill:#757575;
+}
+
+.inner_node rect.highlight {
+    stroke: #009688;
+    stroke-width: 3px;
+    fill:#009688;
+}
+
+.outer_node circle {
+    fill: #fff;
+    stroke: #009688;
+    stroke-width: 1.5px;
+    pointer-events: all;
+}
+
+.outer_node circle.highlight
+{
+    stroke: #009688;
+    stroke-width: 2px;
+}
+
+.link {
+    fill: none;
+	
+}
+

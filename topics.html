@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+        <title>Topic based monthly analysis</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/network.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/footer.css">
+
+
+    <style>
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: black;
+            shape-rendering: crispEdges;
+        }
+
+        .axis text {
+            font-family: sans-serif;
+            font-size: 11px;
+        }
+
+        .dot {
+            stroke: #000;
+        }
+
+
+        .legend {
+            padding: 5px;
+            font: 10px sans-serif;
+            background: yellow;
+            box-shadow: 2px 2px 1px #888;
+        }
+
+        svg {
+            width: 100%;
+            /* //height: 100%; 
+        //    position: center; */
+        }
+
+        .toolTip {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            position: absolute;
+            display: none;
+            width: auto;
+            height: auto;
+            background: none repeat scroll 0 0 white;
+            border: 0 none;
+            border-radius: 8px 8px 8px 8px;
+            box-shadow: -3px 3px 15px #888888;
+            color: black;
+            font: 12px sans-serif;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+
+    
+        <meta charset="utf-8">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="http://d3js.org/d3.v3.min.js">
+            d3.selectAll("svg").remove();
+        </script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<header>
+           
+ <div class="w3-top">
+
+  <div class="w3-bar w3-teal w3-card w3-left-align w3-tiny" style="width:100%;"> 
+          <div class="row">
+		      <a href="index.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-home w3-xxlarge"></i>
+					<p>HOME</p>
+					</a>
+              <a href="packages.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-file w3-xxlarge"></i>
+					<p>TOP PACKAGES</p>
+					</a>
+            <a href="topics.html" class="w3-bar-item w3-button w3-padding-small w3-text-teal w3-white" style="width:16.66%;">
+					<i class="fa fa-bars w3-xxlarge"></i>
+					<p>TOPICS ANALYSIS</p>
+					</a>
+			<a href="weekly.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-calendar w3-xxlarge"></i>
+					<p>WEEKLY ANALYSIS</p>
+					</a>
+			<a href="userid.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-user w3-xxlarge"></i>
+					<p>USER ID ANALYSIS</p>
+					</a>		
+			<a href="svm.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-gear w3-xxlarge"></i>
+					<p>SVM ANALYSIS</p>
+					</a>						
+            </div>
+			</div>
+		    </header>
+    <body class="w3-light-grey" id="topbody">
+        <br><br><br><br>
+        
+		<h2 align="center"><span class="w3-tag w3-light-grey w3-text-teal w3-round">Monthly analysis of top topics based on # questions/answers/accepted-answers for each topic</span><hr></h2>
+            <font color="#696969" ><p> Select month from dropdown menu</p></font>
+        
+        <div class="w3-dropdown-hover">
+		
+            <button type="button" class="w3-dropdown-hover w3-bar-block w3-card-4 w3-teal w3-text-white " data-toggle="dropdown">
+                Number of Responses for Month
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a class="m" value="Jan" href="#">Jan</a>
+                </li>
+                <li>
+                    <a class="m" value="Feb" href="#">Feb</a>
+                </li>
+                <li>
+                    <a class="m" value="Mar" href="#">Mar</a>
+                </li>
+                <li>
+                    <a class="m" value="Apr" href="#">Apr</a>
+                </li>
+                <li>
+                    <a class="m" value="May" href="#">May</a>
+                </li>
+                <li>
+                    <a class="m" value="June" href="#">June</a>
+                </li>
+                <li>
+                    <a class="m" value="July" href="#">July</a>
+                </li>
+                <li>
+                    <a class="m" value="Aug" href="#">Aug</a>
+                </li>
+                <li>
+                    <a class="m" value="Sep" href="#">Sep</a>
+                </li>
+                <li>
+                    <a class="m" value="Oct" href="#">Oct</a>
+                </li>
+                <li>
+                    <a class="m" value="Nov" href="#">Nov</a>
+                </li>
+                <li>
+                    <a class="m" value="Dec" href="#">Dec</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="mbars">
+        </div>
+        
+        </div>
+		<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Work Row -->
+<div class="w3-row-padding w3-padding-16 w3-theme-l1 w3-center" id="work">
+<h2>OUR TEAM</h2>
+<p>Meet the team - our Picassos:</p>
+
+<div class="w3-row"><br>
+
+<div class="w3-quarter">
+  <img src="images/malkiyat1.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+  <h3>Malkiyat Singh</h3>
+  <h6>msingh55@asu.edu</h6>
+</div>
+
+<div class="w3-quarter">
+  <img src="images/ankush1.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+  <h3>Ankush Kanungo</h3>
+  <h6>akanung1@asu.edu</h6>
+</div>
+
+<div class="w3-quarter">
+  <img src="images/pranshu.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+  <h3>Pranshu Varshney</h3>
+  <h6>pvarshn1@asu.edu</h6>
+</div>
+
+<div class="w3-quarter">
+  <img src="images/anto1.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+  <h3>Anto Oswin Nihal</h3>
+  <h6>antooswin@asu.edu</h6>
+</div>
+</div>
+
+</div>
+
+<!-- Container -->
+
+
+<!-- Footer -->
+<footer class="ww3-container w3-padding-32 w3-theme-l5 w3-center">
+  <h4>Follow Us</h4>
+  <a class="w3-button w3-large w3-teal w3-hide-small" href="https://www.linkedin.com/in/malkiyat/" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+  <a class="w3-button w3-large w3-teal w3-hide-small" href="https://www.linkedin.com/in/ankush-kanungo/" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+  <a class="w3-button w3-large w3-teal w3-hide-small" href="https://www.linkedin.com/in/pranshu-varshney/" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+  <a class="w3-button w3-large w3-teal w3-hide-small" href="https://www.linkedin.com/in/anto-oswin/" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+  <p>Data Visualization CSE 578 <a href="https://sites.google.com/a/asu.edu/cse578_datavisualization-spring-2018/" target="_blank">Spring 18</a></p>
+
+  <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
+    <span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>   
+    <a class="w3-button w3-theme" href="#topbody"><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+  </div>
+</footer>
+        <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+        <script type="text/javascript">
+
+var diameter = document.getElementById("mbars").offsetWidth;
+            var Jan = [
+                {
+                    "Package": "Android",
+                    "AcceptedAnswers": 1329,
+                    "Answers": 2643,
+                    "Questions": 2862
+                },
+                {
+                    "Package": "Spring",
+                    "AcceptedAnswers": 511,
+                    "Answers": 797,
+                    "Questions": 1067
+                },
+                {
+                    "Package": "Swing",
+                    "AcceptedAnswers": 636,
+                    "Answers": 967,
+                    "Questions": 1161
+                },
+                {
+                    "Package": "Hibernate",
+                    "AcceptedAnswers": 240,
+                    "Answers": 432,
+                    "Questions": 533
+                },
+                {
+                    "Package": "Maven",
+                    "AcceptedAnswers": 221,
+                    "Answers": 343,
+                    "Questions": 461
+                },
+                {
+                    "Package": "JSP",
+                    "AcceptedAnswers": 214,
+                    "Answers": 350,
+                    "Questions": 421
+                },
+                {
+                    "Package": "JSON",
+                    "AcceptedAnswers": 176,
+                    "Answers": 265,
+                    "Questions": 338
+                }
+            ];
+            var Feb = [
+                {
+                    "Package": "Android",
+                    "AcceptedAnswers": 1399,
+                    "Answers": 2672,
+                    "Questions": 3164
+                },
+                {
+                    "Package": "Spring",
+                    "AcceptedAnswers": 451,
+                    "Answers": 730,
+                    "Questions": 1066
+                },
+                {
+                    "Package": "Swing",
+                    "AcceptedAnswers": 542,
+                    "Answers": 950,
+                    "Questions": 1067
+                },
+                {
+                    "Package": "Hibernate",
+                    "AcceptedAnswers": 236,
+                    "Answers": 431,
+                    "Questions": 622
+                },
+                {
+                    "Package": "Maven",
+                    "AcceptedAnswers": 208,
+                    "Answers": 307,
+                    "Questions": 476
+                },
+                {
+                    "Package": "JSP",
+                    "AcceptedAnswers": 142,
+                    "Answers": 331,
+                    "Questions": 376
+                },
+                {
+                    "Package": "JSON",
+                    "AcceptedAnswers": 168,
+                    "Answers": 291,
+                    "Questions": 353
+                }
+            ];
+
+            var Mar = [
+                {
+                    "Package": "Android",
+                    "AcceptedAnswers": 1559,
+                    "Answers": 2847,
+                    "Questions": 3674
+                },
+                {
+                    "Package": "Spring",
+                    "AcceptedAnswers": 559,
+                    "Answers": 768,
+                    "Questions": 1254
+                },
+                {
+                    "Package": "Swing",
+                    "AcceptedAnswers": 722,
+                    "Answers": 1056,
+                    "Questions": 1371
+                },
+                {
+                    "Package": "Hibernate",
+                    "AcceptedAnswers": 283,
+                    "Answers": 483,
+                    "Questions": 733
+                },
+                {
+                    "Package": "Maven",
+                    "AcceptedAnswers": 204,
+                    "Answers": 319,
+                    "Questions": 520
+                },
+                {
+                    "Package": "JSP",
+                    "AcceptedAnswers": 186,
+                    "Answers": 311,
+                    "Questions": 455
+                },
+                {
+                    "Package": "JSON",
+                    "AcceptedAnswers": 214,
+                    "Answers": 301,
+                    "Questions": 430
+                }
+            ];
+            var Apr = [
+                {
+                    "Package": "Android",
+                    "AcceptedAnswers": 1332,
+                    "Answers": 2479,
+                    "Questions": 3330
+                },
+                {
+                    "Package": "Spring",
+                    "AcceptedAnswers": 572,
+                    "Answers": 826,
+                    "Questions": 1248
+                },
+                {
+                    "Package": "Swing",
+                    "AcceptedAnswers": 653,
+                    "Answers": 930,
+                    "Questions": 1342
+                },
+                {
+                    "Package": "Hibernate",
+                    "AcceptedAnswers": 253,
+                    "Answers": 387,
+                    "Questions": 620
+                },
+                {
+                    "Package": "Maven",
+                    "AcceptedAnswers": 217,
+                    "Answers": 319,
+                    "Questions": 512
+                },
+                {
+                    "Package": "JSP",
+                    "AcceptedAnswers": 199,
+                    "Answers": 406,
+                    "Questions": 516
+                },
+                {
+                    "Package": "JSON",
+                    "AcceptedAnswers": 183,
+                    "Answers": 319,
+                    "Questions": 411
+                }
+            ];
+            var May = [
+                {
+                    "Package": "Android",
+                    "AcceptedAnswers": 1104,
+                    "Answers": 1879,
+                    "Questions": 2693
+                },
+                {
+                    "Package": "Spring",
+                    "AcceptedAnswers": 517,
+                    "Answers": 730,
+                    "Questions": 1198
+                },
+                {
+                    "Package": "Swing",
+                    "AcceptedAnswers": 563,
+                    "Answers": 773,
+                    "Questions": 1042
+                },
+                {
+                    "Package": "Hibernate",
+                    "AcceptedAnswers": 271,
+                    "Answers": 393,
+                    "Questions": 626
+                },
+                {
+                    "Package": "Maven",
+                    "AcceptedAnswers": 192,
+                    "Answers": 298,
+                    "Questions": 498
+                },
+                {
+                    "Package": "JSP",
+                    "AcceptedAnswers": 225,
+                    "Answers": 358,
+                    "Questions": 472
+                },
+                {
+                    "Package": "JSON",
+                    "AcceptedAnswers": 144,
+                    "Answers": 217,
+                    "Questions": 327
+                }
+            ];
+            var June = [
+                {
+                    "Package": "Android",
+                    "AcceptedAnswers": 1091,
+                    "Answers": 1767,
+                    "Questions": 2618
+                },
+                {
+                    "Package": "Spring",
+                    "AcceptedAnswers": 471,
+                    "Answers": 686,
+                    "Questions": 1089
+                },
+                {
+                    "Package": "Swing",
+                    "AcceptedAnswers": 403,
+                    "Answers": 509,
+                    "Questions": 736
+                },
+                {
+                    "Package": "Hibernate",
+                    "AcceptedAnswers": 194,
+                    "Answers": 346,
+                    "Questions": 592
+                },
+                {
+                    "Package": "Maven",
+                    "AcceptedAnswers": 169,
+                    "Answers": 267,
+                    "Questions": 482
+                },
+                {
+                    "Package": "JSP",
+                    "AcceptedAnswers": 151,
+                    "Answers": 310,
+                    "Questions": 339
+                },
+                {
+                    "Package": "JSON",
+                    "AcceptedAnswers": 152,
+                    "Answers": 221,
+                    "Questions": 329
+                }
+            ];
+            var July = [
+                {
+                    "Package": "Android",
+                    "AcceptedAnswers": 1256,
+                    "Answers": 2254,
+                    "Questions": 3067
+                },
+                {
+                    "Package": "Spring",
+                    "AcceptedAnswers": 541,
+                    "Answers": 806,
+                    "Questions": 1286
+                },
+                {
+                    "Package": "Swing",
+                    "AcceptedAnswers": 426,
+                    "Answers": 619,
+                    "Questions": 848
+                },
+                {
+                    "Package": "Hibernate",
+                    "AcceptedAnswers": 284,
+                    "Answers": 425,
+                    "Questions": 637
+                },
+                {
+                    "Package": "Maven",
+                    "AcceptedAnswers": 220,
+                    "Answers": 304,
+                    "Questions": 539
+                },
+                {
+                    "Package": "JSP",
+                    "AcceptedAnswers": 171,
+                    "Answers": 346,
+                    "Questions": 411
+                },
+                {
+                    "Package": "JSON",
+                    "AcceptedAnswers": 170,
+                    "Answers": 276,
+                    "Questions": 392
+                }
+            ];
+            var Aug = [
+                {
+                    "Package": "Android",
+                    "AcceptedAnswers": 1194,
+                    "Answers": 2150,
+                    "Questions": 2887
+                },
+                {
+                    "Package": "Spring",
+                    "AcceptedAnswers": 468,
+                    "Answers": 731,
+                    "Questions": 1153
+                },
+                {
+                    "Package": "Swing",
+                    "AcceptedAnswers": 436,
+                    "Answers": 604,
+                    "Questions": 813
+                },
+                {
+                    "Package": "Hibernate",
+                    "AcceptedAnswers": 238,
+                    "Answers": 397,
+                    "Questions": 603
+                },
+                {
+                    "Package": "Maven",
+                    "AcceptedAnswers": 204,
+                    "Answers": 324,
+                    "Questions": 501
+                },
+                {
+                    "Package": "JSP",
+                    "AcceptedAnswers": 133,
+                    "Answers": 247,
+                    "Questions": 339
+                },
+                {
+                    "Package": "JSON",
+                    "AcceptedAnswers": 181,
+                    "Answers": 307,
+                    "Questions": 394
+                }
+            ];
+            var Sep = [
+                {
+                    "Package": "Android",
+                    "AcceptedAnswers": 1051,
+                    "Answers": 1959,
+                    "Questions": 2629
+                },
+                {
+                    "Package": "Spring",
+                    "AcceptedAnswers": 499,
+                    "Answers": 808,
+                    "Questions": 1264
+                },
+                {
+                    "Package": "Swing",
+                    "AcceptedAnswers": 360,
+                    "Answers": 490,
+                    "Questions": 694
+                },
+                {
+                    "Package": "Hibernate",
+                    "AcceptedAnswers": 234,
+                    "Answers": 483,
+                    "Questions": 665
+                },
+                {
+                    "Package": "Maven",
+                    "AcceptedAnswers": 207,
+                    "Answers": 386,
+                    "Questions": 540
+                },
+                {
+                    "Package": "JSP",
+                    "AcceptedAnswers": 156,
+                    "Answers": 278,
+                    "Questions": 348
+                },
+                {
+                    "Package": "JSON",
+                    "AcceptedAnswers": 162,
+                    "Answers": 256,
+                    "Questions": 381
+                }
+            ];
+            var Oct = [
+                {
+                    "Package": "Android",
+                    "AcceptedAnswers": 1033,
+                    "Answers": 1900,
+                    "Questions": 2639
+                },
+                {
+                    "Package": "Spring",
+                    "AcceptedAnswers": 495,
+                    "Answers": 725,
+                    "Questions": 1265
+                },
+                {
+                    "Package": "Swing",
+                    "AcceptedAnswers": 396,
+                    "Answers": 528,
+                    "Questions": 800
+                },
+                {
+                    "Package": "Hibernate",
+                    "AcceptedAnswers": 219,
+                    "Answers": 367,
+                    "Questions": 608
+                },
+                {
+                    "Package": "Maven",
+                    "AcceptedAnswers": 183,
+                    "Answers": 318,
+                    "Questions": 476
+                },
+                {
+                    "Package": "JSP",
+                    "AcceptedAnswers": 154,
+                    "Answers": 298,
+                    "Questions": 353
+                },
+                {
+                    "Package": "JSON",
+                    "AcceptedAnswers": 169,
+                    "Answers": 264,
+                    "Questions": 395
+                }
+            ];
+            var Nov = [
+                {
+                    "Package": "Android",
+                    "AcceptedAnswers": 1025,
+                    "Answers": 1890,
+                    "Questions": 2611
+                },
+                {
+                    "Package": "Spring",
+                    "AcceptedAnswers": 539,
+                    "Answers": 852,
+                    "Questions": 1363
+                },
+                {
+                    "Package": "Swing",
+                    "AcceptedAnswers": 400,
+                    "Answers": 507,
+                    "Questions": 843
+                },
+                {
+                    "Package": "Hibernate",
+                    "AcceptedAnswers": 225,
+                    "Answers": 426,
+                    "Questions": 619
+                },
+                {
+                    "Package": "Maven",
+                    "AcceptedAnswers": 175,
+                    "Answers": 312,
+                    "Questions": 477
+                },
+                {
+                    "Package": "JSP",
+                    "AcceptedAnswers": 142,
+                    "Answers": 241,
+                    "Questions": 334
+                },
+                {
+                    "Package": "JSON",
+                    "AcceptedAnswers": 157,
+                    "Answers": 253,
+                    "Questions": 348
+                }
+            ];
+            var Dec = [
+                {
+                    "Package": "Android",
+                    "AcceptedAnswers": 966,
+                    "Answers": 1956,
+                    "Questions": 2547
+                },
+                {
+                    "Package": "Spring",
+                    "AcceptedAnswers": 458,
+                    "Answers": 793,
+                    "Questions": 1168
+                },
+                {
+                    "Package": "Swing",
+                    "AcceptedAnswers": 340,
+                    "Answers": 572,
+                    "Questions": 789
+                },
+                {
+                    "Package": "Hibernate",
+                    "AcceptedAnswers": 209,
+                    "Answers": 377,
+                    "Questions": 557
+                },
+                {
+                    "Package": "Maven",
+                    "AcceptedAnswers": 152,
+                    "Answers": 314,
+                    "Questions": 433
+                },
+                {
+                    "Package": "JSP",
+                    "AcceptedAnswers": 130,
+                    "Answers": 235,
+                    "Questions": 295
+                },
+                {
+                    "Package": "JSON",
+                    "AcceptedAnswers": 153,
+                    "Answers": 292,
+                    "Questions": 364
+                }
+            ];
+            /* Add for all months */
+
+
+            var color_hash = {
+                0: ["Questions", "#1f77b4"],
+                1: ["Answers", "#2ca02c"],
+                2: ["AcceptedAnswers", "#ff7f0e"]
+
+            };
+            var xData = ["AcceptedAnswers", "Answers", "Questions"];
+
+
+            var margin = { top: 100, right: 50, bottom: 30, left: 80 },
+                width = document.getElementById("mbars").offsetWidth/2,
+                height = document.getElementById("mbars").offsetWidth/4;
+            d3.selectAll("svg").remove();
+            var x = d3.scale.ordinal()
+                .rangeRoundBands([0, width + 40], .35);
+
+            var y = d3.scale.linear()
+                .rangeRound([height, 0]);
+            //var color = d3.scale.category20();
+            var color = ["#ff7f0e", "#2ca02c", "#1f77b4"]
+
+            var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient("bottom");
+            var yAxis = d3.svg.axis()
+                .scale(y)
+                .orient("left")
+            //.ticks(10);
+
+            // tootltip
+            var div = d3.select("#mbars").append("div").attr("class", "toolTip");
+            var svg = d3.select("#mbars").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom + 10)
+                .append("g")
+                .attr("transform", "translate(" + document.getElementById("mbars").offsetWidth/4 + "," + margin.top + ")");
+
+            var dataIntermediate = xData.map(function (c) {
+                return Jan.map(function (d) {
+                    return { x: d.Package, y: d[c] };
+                });
+            });
+			console.log(document.getElementById("mbars").offsetWidth);
+            var dataStackLayout = d3.layout.stack()(dataIntermediate);
+
+            x.domain(dataStackLayout[0].map(function (d) {
+                return d.x;
+            }));
+
+            y.domain([0,
+                d3.max(dataStackLayout[dataStackLayout.length - 1],
+                    function (d) { return d.y0 + d.y; })
+            ])
+                .nice();
+
+            // var tooltip = d3.select("body").append("g").attr("class", "toolTip");
+            var layer = svg.selectAll(".stack")
+                .data(dataStackLayout)
+                .enter().append("g")
+                .attr("class", "stack")
+                .style("fill", function (d, i) {
+                    return color[i];
+                });
+            layer.selectAll("rect")
+                .data(function (d) {
+                    return d;
+                })
+                .enter().append("rect")
+                .attr("x", function (d) {
+                    return x(d.x);
+                })
+
+                .attr("y", function (d) {
+                    return y(d.y + d.y0);
+                })
+                .attr("height", function (d) {
+                    return y(d.y0) - y(d.y + d.y0);
+                })
+                .attr("width", x.rangeBand())
+                .on("mouseover", function (d) {
+                    //console.log(d.y);
+                    div.style("left", d3.event.pageX + 10 + "px");
+                    div.style("top", d3.event.pageY - 25 + "px");
+                    div.style("display", "inline-block");
+                    div.html(d.y);
+                })
+                .on("mouseout", function (d) {
+                    div.style("display", "none");
+                })
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+            svg.append("g")
+                .attr("class", "y axis")
+                .attr("transform", "translate(" + 0 + "," + 0 + ")")
+                .call(yAxis);
+
+            // Add legends
+            var legend = svg.append("g")
+                .attr("class", "legend")
+                .attr("x", width - margin.right - 65)
+                .attr("y", 25)
+                .attr("height", 100)
+                .attr("width", 100);
+
+            legend.selectAll("g").data(dataStackLayout)
+                .enter()
+                .append('g')
+                .each(function (d, i) {
+                    var g = d3.select(this);
+                    g.append("rect")
+                        .attr("x", width - margin.right - 65)
+                        .attr("y", i * 25 + 10)
+                        .attr("width", 10)
+                        .attr("height", 10)
+                        .style("fill", color_hash[String(i)][1]);
+
+                    g.append("text")
+                        .attr("x", width - margin.right - 50)
+                        .attr("y", i * 25 + 20)
+                        .attr("height", 30)
+                        .attr("width", 100)
+                        .style("fill", color_hash[String(i)][1])
+                        .text(color_hash[String(i)][0]);
+                });
+            svg.append("text")
+                .attr("class", "xtext")
+                .attr("x", width / 1.5 - margin.left)
+                .attr("y", height + 35)
+                .attr("text-anchor", "middle")
+                .text("Days");
+            svg.select(".xtext")
+                .text("Top Packages");
+
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0 - 65)
+                .attr("x", 0 - 220)
+                .attr("dy", "1em")
+                .text("Number of Responses");
+            svg.append("text")
+                .attr("class", "title")
+                .attr("x", (width / 1.85))
+                .attr("y", -40)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "underline")
+            svg.select(".title")
+                .text("Number of Response for each tags for month of Jan" + ".");
+
+            // Re-render
+            d3.selectAll(".m")
+                .on("click", function () {
+                    d3.selectAll("svg").remove();
+
+                    var x = d3.scale.ordinal()
+                        .rangeRoundBands([0, width + 40], .35);
+
+                    var y = d3.scale.linear()
+                        .rangeRound([height, 0]);
+                    //var color = d3.scale.category20();
+                    var color = ["#ff7f0e", "#2ca02c", "#1f77b4"]
+
+                    var xAxis = d3.svg.axis()
+                        .scale(x)
+                        .orient("bottom");
+                    var yAxis = d3.svg.axis()
+                        .scale(y)
+                        .orient("left")
+                    //.ticks(10);
+                    var div1 = d3.select("#mbars").append("div").attr("class", "toolTip");
+                    var svg = d3.select("#mbars").append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom + 10)
+                        .append("g")
+                        .attr("transform", "translate(" + document.getElementById('mbars').offsetWidth/4 + "," + margin.top + ")");
+
+                    var month = this.getAttribute("value");
+
+                    var newData;
+                    if (month == "Jan") {
+                        newData = Jan;
+                    } else if (month == "Feb") {
+                        newData = Feb;
+                    }
+                    else if (month == "Mar") {
+                        newData = Mar;
+                    }
+                    else if (month == "Apr") {
+                        newData = Apr;
+                    }
+                    else if (month == "May") {
+                        newData = May;
+                    }
+                    else if (month == "June") {
+                        newData = June;
+                    }
+                    else if (month == "July") {
+                        newData = July;
+                    }
+                    else if (month == "Aug") {
+                        newData = Aug;
+                    }
+                    else if (month == "Sep") {
+                        newData = Sep;
+                    }
+                    else if (month == "Oct") {
+                        newData = Oct;
+                    }
+                    else if (month == "Nov") {
+                        newData = Nov;
+                    }
+                    else {
+                        newData = Dec;
+                    }
+
+
+                    var dataIntermediate = xData.map(function (c) {
+                        return newData.map(function (d) {
+                            return { x: d.Package, y: d[c] };
+                        });
+                    });
+
+                    var dataStackLayout = d3.layout.stack()(dataIntermediate);
+
+                    x.domain(dataStackLayout[0].map(function (d) {
+                        return d.x;
+                    }));
+
+                    y.domain([0,
+                        d3.max(dataStackLayout[dataStackLayout.length - 1],
+                            function (d) { return d.y0 + d.y; })
+                    ])
+                        .nice();
+
+                    var layer = svg.selectAll(".stack")
+                        .data(dataStackLayout)
+                        .enter().append("g")
+                        .attr("class", "stack")
+                        .style("fill", function (d, i) {
+                            return color[i];
+                        });
+
+                    layer.selectAll("rect")
+                        .data(function (d) {
+                            return d;
+                        })
+                        .enter().append("rect")
+                        .on("mouseover", function (d) {
+                            div1.style("left", d3.event.pageX + 10 + "px");
+                            div1.style("top", d3.event.pageY - 25 + "px");
+                            div1.style("display", "inline-block");
+                            div1.html(d.y);
+                        })
+                        .on("mouseout", function (d) {
+                            div1.style("display", "none");
+                        })
+                        .transition().duration(2000).ease("linear")
+                        .attr("x", function (d) {
+                            return x(d.x);
+                        })
+                        .attr("y", function (d) {
+                            return y(d.y + d.y0);
+                        })
+                        .attr("height", function (d) {
+                            return y(d.y0) - y(d.y + d.y0);
+                        })
+                        .attr("width", x.rangeBand())
+
+
+                    svg.append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .transition()
+                        .duration(1000)
+                        .ease("circle")
+
+                        .call(xAxis);
+                    svg.append("g")
+                        .attr("class", "y axis")
+                        .attr("transform", "translate(" + 0 + "," + 0 + ")")
+                        .transition()
+                        .duration(1000)
+                        .ease("circle")
+                        .call(yAxis);
+
+                    // Add legends
+                    var legend = svg.append("g")
+                        .attr("class", "legend")
+                        .attr("x", width - margin.right - 65)
+                        .attr("y", 25)
+                        .attr("height", 100)
+                        .attr("width", 100);
+                    legend.selectAll("g").data(dataStackLayout)
+                        .enter()
+                        .append('g')
+                        .each(function (d, i) {
+                            var g = d3.select(this);
+                            g.append("rect")
+                                .attr("x", width - margin.right - 65)
+                                .attr("y", i * 25 + 10)
+                                .attr("width", 10)
+                                .attr("height", 10)
+                                .style("fill", color_hash[String(i)][1]);
+
+                            g.append("text")
+                                .attr("x", width - margin.right - 50)
+                                .attr("y", i * 25 + 20)
+                                .attr("height", 30)
+                                .attr("width", 100)
+                                .style("fill", color_hash[String(i)][1])
+                                .text(color_hash[String(i)][0]);
+                        });
+                    svg.append("text")
+                        .attr("class", "xtext")
+                        .attr("x", width / 1.5 - margin.left)
+                        .attr("y", height + 35)
+                        .attr("text-anchor", "middle")
+                        .text("Days");
+                    svg.select(".xtext")
+                        .text("Top Packages");
+
+                    svg.append("text")
+                        .attr("transform", "rotate(-90)")
+                        .attr("y", 0 - 65)
+                        .attr("x", 0 - 220)
+                        .attr("dy", "1em")
+                        .text("Number of Responses");
+                    svg.append("text")
+                        .attr("class", "title")
+                        .attr("x", (width / 1.85))
+                        .attr("y", -40)
+                        .attr("text-anchor", "middle")
+                        .style("font-size", "16px")
+                        .style("text-decoration", "underline")
+                    svg.select(".title")
+                        .text("Number of Responses for each packages for month of " + month + ".");
+                });
+
+        </script>
+        <script>
+            $(document).ready(function () {
+                $(".nav-tabs a").click(function () {
+
+                    $(this).tab('show');
+                });
+            });
+        </script>
+        <script>
+            $.ajaxSetup({
+                // Disable caching of AJAX responses
+                // Used when debugging
+                cache: false
+            });
+
+                // $.getScript("a.js");
+                // $(".atab").click(function () {
+                //     $.getScript("a.js");
+                // })
+        </script>
+
+        <script>
+            $(".atab").click(function () {
+                $.getScript("a.js");
+            })
+        </script>
+    </body>
+
+
+</html>

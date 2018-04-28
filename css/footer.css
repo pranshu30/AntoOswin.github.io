@@ -1,0 +1,65 @@
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.footcolumn {
+  float: left;
+  width: 25%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+  
+  
+}
+
+@media screen and (max-width: 650px) {
+  .footcolumn {
+    width: 100%;
+    display: block;
+  }
+}
+
+.footcard {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background:white;
+}
+
+.footcontainer {
+  padding: 0 16px;
+  background-color: white;
+  color: teal;
+  font: 11.5px "Roboto";
+}
+
+.footcontainer::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+  font: 12px "Roboto";
+}
+
+.footbutton {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: teal;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.footbutton:hover {
+  background-color: grey;
+}
+#circle
+{
+  width:150px;
+  height:150px;
+  border:0px solid black;
+  border-radius:100%;
+}

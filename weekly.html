@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+  <title>Weekly Analysis using sunburst</title>
+  <meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=9" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- bootstrap -->
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/network.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/footer.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+    crossorigin="anonymous"></script>
+
+
+  <style>
+    div.tooltip {
+      position: absolute;
+      text-align: left;
+      width: auto;
+      height: auto;
+      padding: 8px;
+      font: 12px sans-serif;
+      background: #0a2538;
+      border: #0a2538 1px solid;
+      border-radius: 0px;
+      pointer-events: none;
+      color: white;
+    }
+
+    body {
+     
+      color: #0a2538;
+    }
+  </style>
+<header>
+           
+ <div class="w3-top">
+  <div class="w3-bar w3-teal w3-card w3-left-align w3-tiny" style="width:100%;">
+          <div class="row">
+		      <a href="index.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-home w3-xxlarge"></i>
+					<p>HOME</p>
+					</a>
+              <a href="packages.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-file w3-xxlarge"></i>
+					<p>TOP PACKAGES</p>
+					</a>
+            <a href="topics.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-bars w3-xxlarge"></i>
+					<p>TOPICS ANALYSIS</p>
+					</a>
+			<a href="weekly.html" class="w3-bar-item w3-button w3-padding-small w3-text-teal w3-white" style="width:16.66%;">
+					<i class="fa fa-calendar w3-xxlarge"></i>
+					<p>WEEKLY ANALYSIS</p>
+					</a>
+			<a href="userid.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-user w3-xxlarge"></i>
+					<p>USER ID ANALYSIS</p>
+					</a>		
+			<a href="svm.html" class="w3-bar-item w3-button w3-padding-small w3-teal" style="width:16.66%;">
+					<i class="fa fa-gear w3-xxlarge"></i>
+					<p>SVM ANALYSIS</p>
+					</a>						
+            </div>
+			</div>
+		    </header>
+
+
+<body class="w3-light-grey" id="weeklybody">
+    <br><br><br>
+	<div class="w3-row-padding w3-padding-16 w3-theme-l5 ">
+    <h2 align="center" >Weekly Activity Analysis</h2></div><div class="w3-row-padding w3-padding-16 w3-theme-l4 ">
+ <h5> <ol style="list-style-type:1">
+      <font><li>Weekly Analysis for each day of week based on number of questions, answers, accpeted answers</li>
+      <li>Second level shows questions,answers,accepted-answers. </li><li>Third level shows distribution coresponding to each package</li>
+	  <br> Click on a day/activity/package & hover to view stats.<br>
+	  Click at the center to go back</h5></font></div>
+  
+  <div id="mbars">
+    </div>
+  <script>
+
+var diameter = document.getElementById("mbars").offsetWidth;
+    var margin = {
+      top: 0,
+      right: 20,
+      bottom: 400,
+      left: 20
+    };
+
+    var w = diameter - margin.left - margin.right,
+      h = diameter - margin.top - margin.bottom,
+      radius = (Math.min(w, h) / 2.8) ;
+
+    var formatNumber = d3.format(",d");
+
+    var percentBase = 100;
+
+    var x = d3.scale.linear()
+      .range([0, 2 * Math.PI]);
+
+    var y = d3.scale.linear()
+      .range([0, radius]);
+
+    var partition = d3.layout.partition()
+      .value(function (d) {
+        return d.size;
+      });
+
+    // responsive svg
+    var svg = d3.select("#mbars").append("svg")
+      .attr("width", w)
+      .attr("height", h)
+      .append("g")
+      .attr("transform", "translate(" + diameter / 2 + "," + diameter / 3 + ")");
+
+    var arc = d3.svg.arc()
+      .startAngle(function (d) {
+        return Math.max(0, Math.min(2 * Math.PI, x(d.x)));
+      })
+      .endAngle(function (d) {
+        return Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx)));
+      })
+      .innerRadius(function (d) {
+        return Math.max(0, y(d.y));
+      })
+      .outerRadius(function (d) {
+        return Math.max(0, y(d.y + d.dy));
+      });
+
+
+    // tooltip
+    var tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+    d3.json("data/sunburst_data.json", function (error, root) {
+      if (error) throw error;
+
+      //console.log(root);
+
+
+      var g = svg.selectAll("path")
+        .data(partition.nodes(root))
+        .enter().append("g");
+
+      var path = g.append("path")
+        .attr("d", arc)
+        .style("fill", function (d) {
+          //console.log(d.name);
+          return d.color;
+        })
+        .style("stroke", "white")
+        .style("stroke-width", "1px")
+        .on("click", click)
+        .on("mouseover", function (d, i) {
+          d3.select(this).style("cursor", "pointer")
+          var totalSize = path.node().__data__.value;
+          //console.log("D Value " + d.value);
+          //console.log("Total Size " + totalSize);
+
+          var percentage = Math.round(((100 * d.value / totalSize) * 100) / percentBase);
+          //console.log("Percentage string " + percentage);
+          //console.log("Percentage Base " + percentBase);
+
+          var percentageString = percentage + "%";
+          if (d.name == "Day") return null;
+          tooltip.text(d.name + " " + percentageString)
+            .style("opacity", 0.8)
+            .style("left", (d3.event.pageX) + 0 + "px")
+            .style("top", (d3.event.pageY) - 0 + "px");
+          if (d.name == "Day") {
+            return null;
+          }
+        })
+        .on("mouseout", function (d) {
+          d3.select(this).style("cursor", "default")
+          tooltip.style("opacity", 0);
+        });
+
+
+      var text = g.append("text")
+        .attr("transform", function (d) {
+          return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")";
+        })
+        .attr("text-anchor", "middle")
+        .attr("dx", "0") // margin
+        .attr("dy", ".35em") // vertical-align
+        .text(function (d) {
+          //console.log("The D: " + d.name)
+          return d.name == "Question" ? "Question" : d.name == "Answer" ? "Answer" :
+            d.name == "Accepted-Answer" ? "Acc-Ans" :
+              (d.name == "Day") ? null : d.name; //|| d.name == "android" || d.name == "spring" || d.name == "swing" || d.name == "hibernate" || d.name == "maven" || d.name == "jsp" || d.name == "json" ) ? null : d.name;
+        })
+        .attr("opacity", function (d, i) {
+          var totalSize2 = path.node().__data__.value;
+          //console.log("D Value 2 " + d.value);
+          //console.log("Total Size 2 " + totalSize2);
+          var percentage2 = Math.round(((100 * d.value / totalSize2) * 100) / percentBase);
+          totalSize2 = 0;
+          //console.log("Percentage 2 " + percentage2);
+
+          return percentage2 < 1 ? 0 : 1;
+        })
+        //|| parseFloat(d.percent.split("%")[0]) < 8
+        .style("font-size", "13px")
+        .style("fill", "#0a2538");
+
+
+      function click(d) {
+
+        if (d.name == "Question" || d.name == "Answer" || d.name == "Accepted-Answer")
+          percentBase = (percentBase * parseFloat(d.percent.split("%")[0])) / 100;
+        else if (d.name == "Day")
+          percentBase = 100;
+        else
+          percentBase = parseFloat(d.percent.split("%")[0]);
+
+        //console.log(percentBase)
+        // fade out all text elements
+        text.transition().attr("opacity", 0);
+
+
+        path.transition()
+          .duration(750)
+          .attrTween("d", arcTween(d))
+          .each("end", function (e, i) {
+            // check if the animated element's data e lies within the visible angle span given in d
+            if (e.x >= d.x && e.x < (d.x + d.dx)) {
+              // get a selection of the associated text element
+              var arcText = d3.select(this.parentNode).select("text");
+              // fade in the text element and recalculate positions
+              arcText.transition().duration(750)
+                //.attr("opacity", 1)
+                .attr("opacity", function (d, i) {
+                  var totalSize1 = path.node().__data__.value;
+                  //console.log("D Value 1 " + d.value);
+                  //console.log("Total Size 1 " + totalSize1);
+                  var percentage1 = Math.round(((100 * d.value / totalSize1) * 100) / percentBase);
+                  //console.log("Percentage 1 " + percentage1);
+
+                  totalSize1 = 0;
+                  return percentage1 < 1 ? 0 : 1;
+                })
+                .attr("transform", function (d) {
+                  return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")";
+                })
+                .attr("text-anchor", "middle");
+            }
+          });
+      }
+    });
+
+
+    d3.select(self.frameElement).style("height", height + "px");
+
+    // Interpolate the scales!
+    function arcTween(d) {
+      var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
+        yd = d3.interpolate(y.domain(), [d.y, 1]),
+        yr = d3.interpolate(y.range(), [d.y ? 20 : 0, radius]);
+      return function (d, i) {
+        return i ? function (t) {
+          return arc(d);
+        } : function (t) {
+          x.domain(xd(t));
+          y.domain(yd(t)).range(yr(t));
+          return arc(d);
+        };
+      };
+    }
+
+    function computeTextRotation(d) {
+      var ang = (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
+      return (ang > 90) ? 180 + ang : ang;
+    }
+
+  </script>
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Work Row -->
+<div class="w3-row-padding w3-padding-16 w3-theme-l1 w3-center" id="work">
+<h2>OUR TEAM</h2>
+<p>Meet the team - our Picassos:</p>
+
+<div class="w3-row"><br>
+
+<div class="w3-quarter">
+  <img src="images/malkiyat1.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+  <h3>Malkiyat Singh</h3>
+  <h6>msingh55@asu.edu</h6>
+</div>
+
+<div class="w3-quarter">
+  <img src="images/ankush1.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+  <h3>Ankush Kanungo</h3>
+  <h6>akanung1@asu.edu</h6>
+</div>
+
+<div class="w3-quarter">
+  <img src="images/pranshu.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+  <h3>Pranshu Varshney</h3>
+  <h6>pvarshn1@asu.edu</h6>
+</div>
+
+<div class="w3-quarter">
+  <img src="images/anto1.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+  <h3>Anto Oswin Nihal</h3>
+  <h6>antooswin@asu.edu</h6>
+</div>
+</div>
+
+</div>
+
+<!-- Container -->
+
+
+<!-- Footer -->
+<footer class="ww3-container w3-padding-32 w3-theme-l5 w3-center">
+  <h4>Follow Us</h4>
+  <a class="w3-button w3-large w3-teal w3-hide-small" href="https://www.linkedin.com/in/malkiyat/" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+  <a class="w3-button w3-large w3-teal w3-hide-small" href="https://www.linkedin.com/in/ankush-kanungo/" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+  <a class="w3-button w3-large w3-teal w3-hide-small" href="https://www.linkedin.com/in/pranshu-varshney/" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+  <a class="w3-button w3-large w3-teal w3-hide-small" href="https://www.linkedin.com/in/anto-oswin/" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+  <p>Data Visualization CSE 578 <a href="https://sites.google.com/a/asu.edu/cse578_datavisualization-spring-2018/" target="_blank">Spring 18</a></p>
+
+  <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
+    <span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>   
+    <a class="w3-button w3-theme" href="#weeklybody"><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+  </div>
+</footer>
+</body>
